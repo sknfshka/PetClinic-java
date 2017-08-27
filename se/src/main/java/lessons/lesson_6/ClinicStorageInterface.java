@@ -1,8 +1,5 @@
 package lessons.lesson_6;
 
-import lessons.lesson_6.Client;
-import lessons.lesson_6.WrongInputDataException;
-
 import java.util.Collection;
 
 /**

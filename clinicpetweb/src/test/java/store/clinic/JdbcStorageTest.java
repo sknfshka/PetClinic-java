@@ -16,9 +16,9 @@ public class JdbcStorageTest {
     @Test
     public void add() throws Exception {
         final JdbcStorage storage = new JdbcStorage();
-        final int id = storage.add(new Client("-1", "Anna", new Dog("Anna")));
+        final int id = storage.add(new Client(-1, "Anna", new Dog("Anna")));
         final Client user = storage.get(id);
-        assertEquals(id, Integer.parseInt(user.getId()));
+        assertEquals(id, user.getId());
         storage.close();
     }
 

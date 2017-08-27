@@ -31,7 +31,7 @@ public class JdbcStorage implements ClinicStorageInterface {
             while (rs.next()) {
                 Pet pet = getPet(rs);
 
-                users.add(new Client(rs.getString("uid"), rs.getString("name"), pet));
+                users.add(new Client(rs.getInt("uid"), rs.getString("name"), pet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class JdbcStorage implements ClinicStorageInterface {
 
     @Override
     public void edit(Client client) {
-        delete(Integer.parseInt(client.getId()));
+        delete(client.getId());
         add(client);
     }
 
@@ -84,7 +84,7 @@ public class JdbcStorage implements ClinicStorageInterface {
         Client client = get(id);
 
         try (final PreparedStatement statement = this.connection.prepareStatement("delete from client as client where client.uid = (?)")) {
-            statement.setInt(1, Integer.parseInt(client.getId()));
+            statement.setInt(1, client.getId());
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,7 +106,7 @@ public class JdbcStorage implements ClinicStorageInterface {
                 while (rs.next()) {
                     Pet pet = getPet(rs);
 
-                    return new Client(rs.getString("uid"), rs.getString("name"), pet);
+                    return new Client(rs.getInt("uid"), rs.getString("name"), pet);
                 }
             }
         } catch (SQLException e) {

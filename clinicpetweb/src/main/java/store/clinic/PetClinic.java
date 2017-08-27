@@ -1,7 +1,6 @@
 package store.clinic;
 
 import lessons.lesson_6.Client;
-import lessons.lesson_6.Clinic;
 import lessons.lesson_6.ClinicStorageInterface;
 import lessons.lesson_6.WrongInputDataException;
 
@@ -9,7 +8,7 @@ import java.util.Collection;
 
 public class PetClinic implements ClinicStorageInterface {
     private static final PetClinic instance = new PetClinic();
-    private final ClinicStorageInterface clinic = new JdbcStorage();
+    private final ClinicStorageInterface clinic = new HibernateStorage();
 
     public static PetClinic getInstance() {
         return instance;

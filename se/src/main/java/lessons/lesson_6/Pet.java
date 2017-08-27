@@ -14,5 +14,5 @@ public interface Pet {
     String getKind();
     String getId();
     void setId(String id);
-    public void setAge(int age);
+    void setAge(int age);
 }

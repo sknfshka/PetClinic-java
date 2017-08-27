@@ -21,8 +21,8 @@ public class BlockQueueTest {
         Producer producer = new Producer(
                 queue,
                 Arrays.asList(
-                        new Client("1", "1"), new Client("2", "2"),
-                        new Client("3", "3"), new Client("4", "4")
+                        new Client(1, "1"), new Client(2, "2"),
+                        new Client(3, "3"), new Client(4, "4")
                 )
         );
         producer.start();

@@ -7,7 +7,7 @@ public class Client {
     /**
      * Идентификатор клиента
      */
-    private String id;
+    private int id;
     /**
      * Имя клиента
      */
@@ -22,7 +22,7 @@ public class Client {
      * @param id идентификатор
      * @param name имя
      */
-    public Client(String id, String name) {
+    public Client(int id, String name) {
         this.name = name;
         this.id = id;
     }
@@ -42,11 +42,15 @@ public class Client {
      * @param name имя
      * @param pet питомец
      */
-    public Client(String id, String name, Pet pet) {
+    public Client(int id, String name, Pet pet) {
         this.id = id;
         this.name = name;
         this.pet = pet;
     }
+
+    public Client() {
+    }
+
     /**
      * Копирование клиента
      * @param client клиент
@@ -76,7 +80,7 @@ public class Client {
      * Узнать идентификатор клиента
      * @return идентификатор клиента
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -84,7 +88,7 @@ public class Client {
      * Указать идентификатор клиента
      * @param id идентификатор клиента
      */
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -108,7 +112,7 @@ public class Client {
      * Узнать кличку клиента
      * @return кличка клиента
      */
-    public String getPetsName() {
+    public String getPetName() {
         return this.pet == null ? "" : this.pet.getName();
     }
 
@@ -120,7 +124,7 @@ public class Client {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
@@ -155,11 +159,7 @@ public class Client {
         pet.setName(petName);
     }
 
-    public String getPetName() {
-        return pet.getName();
-    }
-
     public String getPetKind() {
-        return pet.getKind();
+        return pet == null ? "" : pet.getKind();
     }
 }

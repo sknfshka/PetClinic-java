@@ -65,7 +65,7 @@ public class Clinic implements ClinicStorageInterface {
     @Override
     public int add(Client client) {
         if(!clients.contains(client)) {
-            client.setId(Integer.toString(id.getAndIncrement()));
+            client.setId(id.getAndIncrement());
             clients.add(client);
         }
 
@@ -79,7 +79,7 @@ public class Clinic implements ClinicStorageInterface {
     @Override
     public void edit(Client client) {
         if(!clients.contains(client)) {
-            Client findClient = get(Integer.parseInt(client.getId()));
+            Client findClient = get(client.getId());
             findClient.copyFromClient(client);
         }
     }
@@ -101,7 +101,7 @@ public class Clinic implements ClinicStorageInterface {
     @Override
     public Client get(int id){
         for(Client client : clients) {
-            if(Integer.parseInt(client.getId()) == id) {
+            if(client.getId() == id) {
                 return client;
             }
         }
@@ -131,6 +131,7 @@ public class Clinic implements ClinicStorageInterface {
 
         return result;
     }
+
 
     /**
      * Поиск клиентов по имени питомца
@@ -162,5 +163,6 @@ public class Clinic implements ClinicStorageInterface {
 
     @Override
     public void close() {
+
     }
 }
