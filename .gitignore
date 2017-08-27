@@ -31,8 +31,6 @@
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
-clinicpetweb/src/main/resources/
-clinicpetweb/src/test/
 clinicpetweb/target/
 out/
 se/se.iml
