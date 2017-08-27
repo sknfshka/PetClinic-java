@@ -50,4 +50,28 @@ public class Dog implements Pet {
     public int hashCode() {
         return super.hashCode();
     }
+
+    @Override
+    public String getKind() {
+        return "Dog";
+    }
+
+    @Override
+    public String getId() {
+        return animal.getId();
+    }
+
+    @Override
+    public void setId(String id) {
+        animal.setId(id);
+    }
+
+    @Override
+    public void setAge(int age) {
+        animal.setAge(age);
+    }
+
+    public Dog(String id, String name, int age) {
+        this.animal = new Animal(id, name, age);
+    }
 }

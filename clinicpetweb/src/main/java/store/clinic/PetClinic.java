@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class PetClinic implements ClinicStorageInterface {
     private static final PetClinic instance = new PetClinic();
-    private final ClinicStorageInterface clinic = new Clinic();
+    private final ClinicStorageInterface clinic = new JdbcStorage();
 
     public static PetClinic getInstance() {
         return instance;
@@ -57,6 +57,5 @@ public class PetClinic implements ClinicStorageInterface {
 
     @Override
     public void close() {
-        clinic.close();
     }
 }

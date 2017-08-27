@@ -158,4 +158,8 @@ public class Client {
     public String getPetName() {
         return pet.getName();
     }
+
+    public String getPetKind() {
+        return pet.getKind();
+    }
 }

@@ -11,13 +11,20 @@
 <html>
 <head>
     <title>Добавление клиента</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <form action="${pageContext.servletContext.contextPath}/clinic/add-client" method="POST">
-    <label>Имя : </label>
-    <input type="text" name="name">
-    <label>Имя питомца : </label>
-    <input type="text" name="petName">
+    <label for="name" >Имя : </label>
+    <input type="text" name="name" id="name">
+    <label for="petName" >Имя питомца : </label>
+    <input type="text" name="petName" id="petName">
+    <label for="kind">Вид питомца :</label>
+    <select name="kind" id="kind">
+        <option value="Dog" selected >Dog</option>
+        <option value="Cat">Cat</option>
+    </select>
     <input type="submit" align="center" value="Добавить"/>
 </form>
 </body>

@@ -10,6 +10,8 @@
 <html>
 <head>
     <title>Клиника</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
     <a href="${pageContext.servletContext.contextPath}/views/clinic/AddClient.jsp">Добавить клиента</a>
@@ -18,12 +20,14 @@
             <td>Id</td>
             <td>Имя</td>
             <td>Имя питомца</td>
+            <td>Вид питомца</td>
         </tr>
         <c:forEach items="${clients}" var="client" varStatus="status">
             <tr valign="top">
                 <td>${client.id}</td>
                 <td>${client.name}</td>
-                <td>${client.getPetName()}</td>
+                <td>${client.pet == null ? "" : client.getPetName()}</td>
+                <td>${client.pet == null ? "" : client.getPetKind()}</td>
                 <td>
                     <a href="${pageContext.servletContext.contextPath}/clinic/edit-client?id=${client.id}">Редактировать</a>
                 </td>

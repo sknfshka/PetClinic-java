@@ -1,5 +1,6 @@
 package servlets.clinic;
 
+import lessons.lesson_6.Cat;
 import lessons.lesson_6.Client;
 import lessons.lesson_6.Dog;
 import store.clinic.PetClinic;
@@ -25,7 +26,12 @@ public class EditClientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.clinic.edit(new Client(req.getParameter("id"), req.getParameter("name"), new Dog(req.getParameter("petName"))));
+        if(req.getParameter("kind").equals("Dog")) {
+            this.clinic.edit(new Client(req.getParameter("id"), req.getParameter("name"), new Dog(req.getParameter("petName"))));
+        }
+        else {
+            this.clinic.edit(new Client(req.getParameter("id"), req.getParameter("name"), new Cat(req.getParameter("petName"))));
+        }
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/view"));
     }
 }

@@ -11,15 +11,24 @@
 <html>
 <head>
     <title>Редактирование клиента ${client.id}</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <form action="${pageContext.servletContext.contextPath}/clinic/edit-client" method="POST">
     <p>Редактирование клиента "${client.id}"</p>
-    <label>Имя : </label>
-    <input type="text" name="name" value="${client.name}">
-    <label>Имя питомца : </label>
-    <input type="text" name="petName" value="${client.getPetName()}">
+    <label for="name">Имя : </label>
+    <input type="text" name="name" id="name" value="${client.name}">
+    <label for="petName">Имя питомца : </label>
+    <input type="text" name="petName" id="petName" value="${client.pet == null ? "" : client.getPetName()}">
     <input type="hidden" name="id" value="${client.id}">
+    <label for="kind">Вид питомца :</label>
+    <select name="kind" id="kind">
+        <c:set var = "petKing" scope = "session" value = "${client.pet == null ? 'Dog' : client.getPetKind().equals('Dog') ? 'Dog' : 'Cat'}"/>
+        <c:set var = "otherPetKing" scope = "session" value = "${petKing == 'Dog' ? 'Cat' :  'Dog'}"/>
+        <option value="${petKing}" selected>"${petKing}"</option>
+        <option value="${otherPetKing}">"${otherPetKing}"</option>
+    </select>
     <input type="submit" align="center" value="Применить"/>
 </form>
 </body>

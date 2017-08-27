@@ -162,6 +162,5 @@ public class Clinic implements ClinicStorageInterface {
 
     @Override
     public void close() {
-
     }
 }
