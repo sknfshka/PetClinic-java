@@ -1,9 +1,8 @@
 package servlets.clinic;
 
-import lessons.lesson_6.Cat;
-import lessons.lesson_6.Client;
-import lessons.lesson_6.Dog;
-import store.clinic.PetClinic;
+import models.Animal;
+import models.Client;
+import store.clinic.ClientCache;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +14,20 @@ import java.io.IOException;
  * Created by User on 27.08.2017.
  */
 public class AddClientServlet extends HttpServlet {
-    private final PetClinic clinic = PetClinic.getInstance();
+    private final ClientCache clinic = ClientCache.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Client client = new Client(req.getParameter("name"));
+
         if(req.getParameter("kind").equals("Dog")) {
-            this.clinic.add(new Client(req.getParameter("name"), new Dog(req.getParameter("petName"))));
+            client.addAnimal(new Animal(req.getParameter("petName"), Integer.parseInt(req.getParameter("age")), Animal.Kind.DOG));
         }
         else {
-            this.clinic.add(new Client(req.getParameter("name"), new Cat(req.getParameter("petName"))));
+            client.addAnimal(new Animal(req.getParameter("petName"), Integer.parseInt(req.getParameter("age")), Animal.Kind.CAT));
         }
+
+        this.clinic.add(client);
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/view"));
     }
 }

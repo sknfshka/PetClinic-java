@@ -17,18 +17,9 @@
 <body>
 <form action="${pageContext.servletContext.contextPath}/clinic/edit-client" method="POST">
     <p>Редактирование клиента "${client.id}"</p>
+    <input type="hidden" name="id" value="${client.id}">
     <label for="name">Имя : </label>
     <input type="text" name="name" id="name" value="${client.name}">
-    <label for="petName">Имя питомца : </label>
-    <input type="text" name="petName" id="petName" value="${client.pet == null ? "" : client.getPetName()}">
-    <input type="hidden" name="id" value="${client.id}">
-    <label for="kind">Вид питомца :</label>
-    <select name="kind" id="kind">
-        <c:set var = "petKing" scope = "session" value = "${client.pet == null ? 'Dog' : client.getPetKind().equals('Dog') ? 'Dog' : 'Cat'}"/>
-        <c:set var = "otherPetKing" scope = "session" value = "${petKing == 'Dog' ? 'Cat' :  'Dog'}"/>
-        <option value="${petKing}" selected>"${petKing}"</option>
-        <option value="${otherPetKing}">"${otherPetKing}"</option>
-    </select>
     <input type="submit" align="center" value="Применить"/>
 </form>
 </body>

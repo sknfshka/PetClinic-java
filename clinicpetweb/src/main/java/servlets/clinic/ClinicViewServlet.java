@@ -1,6 +1,6 @@
 package servlets.clinic;
 
-import store.clinic.PetClinic;
+import store.clinic.ClientCache;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class ClinicViewServlet extends HttpServlet {
 
-    private final PetClinic clinic = PetClinic.getInstance();
+    private final ClientCache clinic = ClientCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

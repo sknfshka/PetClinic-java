@@ -8,9 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>clinic-pet-web</artifactId>
     <packaging>war</packaging>
     <name>Clinic Pet Web</name>
-    <artifactId>clinic-pet-web</artifactId>
 
     <dependencies>
         <dependency>

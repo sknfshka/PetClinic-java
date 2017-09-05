@@ -20,6 +20,8 @@
     <input type="text" name="name" id="name">
     <label for="petName" >Имя питомца : </label>
     <input type="text" name="petName" id="petName">
+    <label for="age" >Возраст : </label>
+    <input type="text" name="age" id="age">
     <label for="kind">Вид питомца :</label>
     <select name="kind" id="kind">
         <option value="Dog" selected >Dog</option>

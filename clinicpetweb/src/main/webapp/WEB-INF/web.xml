@@ -7,46 +7,6 @@
     <display-name>ClinicPet</display-name>
 
     <servlet>
-        <servlet-name>UserViewServlet</servlet-name>
-        <servlet-class>servlets.UserViewServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UserViewServlet</servlet-name>
-        <url-pattern>/user/view</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UserCreateServlet</servlet-name>
-        <servlet-class>servlets.UserCreateServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UserCreateServlet</servlet-name>
-        <url-pattern>/user/create</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UserEditServlet</servlet-name>
-        <servlet-class>servlets.UserEditServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UserEditServlet</servlet-name>
-        <url-pattern>/user/edit</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UserDeleteServlet</servlet-name>
-        <servlet-class>servlets.UserDeleteServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UserDeleteServlet</servlet-name>
-        <url-pattern>/user/delete</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>ClinicViewServlet</servlet-name>
         <servlet-class>servlets.clinic.ClinicViewServlet</servlet-class>
     </servlet>

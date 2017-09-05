@@ -19,15 +19,17 @@
         <tr>
             <td>Id</td>
             <td>Имя</td>
-            <td>Имя питомца</td>
-            <td>Вид питомца</td>
+            <td>Питомцы</td>
         </tr>
         <c:forEach items="${clients}" var="client" varStatus="status">
             <tr valign="top">
                 <td>${client.id}</td>
                 <td>${client.name}</td>
-                <td>${client.pet == null ? "" : client.getPetName()}</td>
-                <td>${client.pet == null ? "" : client.getPetKind()}</td>
+                <td>
+                <c:forEach items="${client.animals}" var="animal" varStatus="animalStatus">
+                    <p>${animal.name} - ${animal.kind.toString()}</p>
+                </c:forEach>
+                </td>
                 <td>
                     <a href="${pageContext.servletContext.contextPath}/clinic/edit-client?id=${client.id}">Редактировать</a>
                 </td>

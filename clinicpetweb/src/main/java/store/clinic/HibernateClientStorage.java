@@ -1,13 +1,11 @@
 package store.clinic;
 
 import lessons.lesson_6.Client;
-import lessons.lesson_6.WrongInputDataException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import lessons.lesson_6.ClinicStorageInterface;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,10 +13,10 @@ import java.util.Collection;
 /**
  * Created by Client on 27.08.2017.
  */
-public class HibernateStorage implements ClinicStorageInterface {
+public class HibernateClientStorage implements Storage<Client> {
     private final SessionFactory factory;
 
-    public HibernateStorage() {
+    public HibernateClientStorage() {
         factory = new Configuration().configure().buildSessionFactory();
     }
 
@@ -53,11 +51,11 @@ public class HibernateStorage implements ClinicStorageInterface {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Client client) {
         final Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            session.delete(new Client(id, null, null));
+            session.delete(new Client(client.getId(), null, null));
         } finally {
             tx.commit();
             session.close();
@@ -77,7 +75,7 @@ public class HibernateStorage implements ClinicStorageInterface {
     }
 
     @Override
-    public Collection<Client> findByName(String name) throws WrongInputDataException {
+    public Collection<Client> findByName(String name) {
         Collection<Client> result = new ArrayList<>();
 
         final Session session = factory.openSession();
@@ -92,15 +90,6 @@ public class HibernateStorage implements ClinicStorageInterface {
         }
 
         return result;
-    }
-
-    @Override
-    public Collection<Client> findByPetName(String petName) throws WrongInputDataException {
-        return null;
-    }
-    @Override
-    public int generateId() {
-        return 0;
     }
 
     @Override

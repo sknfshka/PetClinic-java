@@ -1,6 +1,7 @@
 package servlets.clinic;
 
-import store.clinic.PetClinic;
+import models.Client;
+import store.clinic.ClientCache;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +10,11 @@ import java.io.IOException;
 
 
 public class DeleteClientServlet extends HttpServlet {
-    private final PetClinic clinic = PetClinic.getInstance();
+    private final ClientCache clinic = ClientCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.clinic.delete(Integer.parseInt(req.getParameter("id")));
+        this.clinic.delete(this.clinic.get(Integer.parseInt(req.getParameter("id"))));
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/view"));
     }
 }
