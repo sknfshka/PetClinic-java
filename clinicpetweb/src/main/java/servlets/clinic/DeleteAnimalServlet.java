@@ -10,11 +10,11 @@ import java.io.IOException;
 
 
 public class DeleteAnimalServlet extends HttpServlet {
-    private final AnimalCache clinic = AnimalCache.getInstance();
+    private final AnimalCache animalCache = AnimalCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.clinic.delete(this.clinic.get(Integer.parseInt(req.getParameter("id"))));
+        this.animalCache.delete(this.animalCache.get(Integer.parseInt(req.getParameter("id"))));
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "edit-client?id=" + req.getParameter("clientId")));
     }
 }

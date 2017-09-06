@@ -14,11 +14,11 @@ import java.io.IOException;
  */
 public class ClinicViewServlet extends HttpServlet {
 
-    private final ClientCache clinic = ClientCache.getInstance();
+    private final ClientCache clientCache = ClientCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("clients", this.clinic.values());
+        req.setAttribute("clients", this.clientCache.values());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/ClinicView.jsp");
         dispatcher.forward(req, resp);
     }
@@ -26,6 +26,6 @@ public class ClinicViewServlet extends HttpServlet {
     @Override
     public void destroy() {
         super.destroy();
-        clinic.close();
+        clientCache.close();
     }
 }

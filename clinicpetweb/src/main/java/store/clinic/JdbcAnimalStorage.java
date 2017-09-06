@@ -6,12 +6,13 @@ import service.Settings;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by Client on 27.08.2017.
  */
-public class JdbcAnimalStorage implements Storage<Animal> {
+public class JdbcAnimalStorage implements AnimalStorage<Animal> {
     private final Connection connection;
 
     public JdbcAnimalStorage() {
@@ -38,10 +39,14 @@ public class JdbcAnimalStorage implements Storage<Animal> {
         return animals;
     }
     @Override
-    public int add(Animal animal) {
+    public int add(Animal animal) throws IllegalStateException, IllegalArgumentException{
+        if (animal == null) {
+            throw new IllegalArgumentException();
+        }
+
         try (final PreparedStatement statement = this.connection.prepareStatement("insert into pet (name, kind, age, client_id) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, animal.getName());
-            statement.setString(2, animal.getKind().toString());
+            statement.setString(2, animal.getKind());
             statement.setInt(3, animal.getAge());
             statement.setInt(4, animal.getClientId());
             statement.executeUpdate();
@@ -54,14 +59,18 @@ public class JdbcAnimalStorage implements Storage<Animal> {
             e.printStackTrace();
         }
 
-        return -1;
+        throw new IllegalStateException();
     }
 
     @Override
-    public void edit(Animal animal) {
+    public void edit(Animal animal) throws IllegalArgumentException{
+        if (animal == null) {
+            throw new IllegalArgumentException();
+        }
+
         try (final PreparedStatement statement = this.connection.prepareStatement("update pet set name = (?), kind = (?) , age = (?), client_id = (?) where pet.uid = (?)")) {
             statement.setString(1, animal.getName());
-            statement.setString(2, animal.getKind().toString());
+            statement.setString(2, animal.getKind());
             statement.setInt(3, animal.getAge());
             statement.setInt(4, animal.getClientId());
             statement.setInt(5, animal.getId());
@@ -72,9 +81,9 @@ public class JdbcAnimalStorage implements Storage<Animal> {
     }
 
     @Override
-    public void delete(Animal animal) throws IllegalStateException{
+    public void delete(Animal animal) throws IllegalArgumentException{
         if(animal == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
 
         try (final PreparedStatement statement = this.connection.prepareStatement("delete from pet as pet where pet.uid = (?)")) {
@@ -104,21 +113,20 @@ public class JdbcAnimalStorage implements Storage<Animal> {
         Animal pet = null;
 
         String kind = rs.getString("kind");
-        Animal.Kind animalKind = null;
 
         if(kind != null) {
-            switch (kind.toUpperCase()) {
-                case "DOG": {
-                    animalKind = Animal.Kind.DOG;
+            switch (kind) {
+                case "Dog": {
+                    kind = "Dog";
                     break;
                 }
-                case "CAT" : {
-                    animalKind = Animal.Kind.CAT;
+                case "Cat" : {
+                    kind = "Cat";
                     break;
                 }
             }
 
-            pet = new Animal(rs.getInt("uid"), rs.getString("name"), rs.getInt("age"), animalKind, rs.getInt("client_id"));
+            pet = new Animal(rs.getInt("uid"), rs.getString("name"), rs.getInt("age"), kind, rs.getInt("client_id"));
         }
 
         return pet;
@@ -150,5 +158,24 @@ public class JdbcAnimalStorage implements Storage<Animal> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Collection<Animal> findUserAnimals(int id) {
+        final List<Animal> animals = new LinkedList<>();
+
+        try (final PreparedStatement statement = this.connection.prepareStatement("select pet.client_id, pet.uid, pet.name, pet.age, pet.kind from pet as pet where pet.client_id = (?)")) {
+            statement.setInt(1, id);
+
+            try (final ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    animals.add(getAnimal(rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return animals;
     }
 }

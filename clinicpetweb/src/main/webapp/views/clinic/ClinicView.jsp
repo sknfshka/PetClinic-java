@@ -18,16 +18,10 @@
     <table border="1">
         <tr>
             <td>Имя</td>
-            <td>Питомцы</td>
         </tr>
         <c:forEach items="${clients}" var="client" varStatus="status">
             <tr valign="top">
                 <td>${client.name}</td>
-                <td>
-                <c:forEach items="${client.animals}" var="animal" varStatus="animalStatus">
-                    <p>${animal.name} - ${animal.kind.toString()}</p>
-                </c:forEach>
-                </td>
                 <td>
                     <a href="${pageContext.servletContext.contextPath}/clinic/edit-client?id=${client.id}">Редактировать</a>
                 </td>

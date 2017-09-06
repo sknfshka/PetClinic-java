@@ -16,7 +16,6 @@ public class JdbcClientStorageTest {
     public void add() throws Exception {
         final JdbcClientStorage storage = new JdbcClientStorage();
         Client client = new Client("Nick");
-        client.addAnimal(new Animal("Nick", 11, Animal.Kind.CAT));
         final int id = storage.add(client);
         final Client user = storage.get(id);
         assertEquals(id, user.getId());
@@ -35,7 +34,6 @@ public class JdbcClientStorageTest {
     public void delete()throws Exception {
         final JdbcClientStorage storage = new JdbcClientStorage();
         Client client = new Client("Nick");
-        client.addAnimal(new Animal("Nick", 11, Animal.Kind.CAT));
         storage.add(client);
 
         Collection<Client> clients = storage.findByName("Nick");

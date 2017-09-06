@@ -1,12 +1,8 @@
 package models;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Client {
     private int id;
     private String name;
-    private List<Animal> animals = new LinkedList<>();
 
     public Client() {
     }
@@ -22,14 +18,6 @@ public class Client {
 
     public Client(int id) {
         this.id = id;
-    }
-
-    public List<Animal> getAnimals() {
-        return animals;
-    }
-
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
     }
 
     public int getId() {
@@ -51,10 +39,6 @@ public class Client {
     @Override
     public String toString() {
         String resultString = "id: " + this.id + " name: " + this.name + " animals: { ";
-
-        for (Animal animal : this.animals) {
-            resultString = resultString + animal.toString() + "; ";
-        }
 
         resultString = resultString + "}";
 
@@ -85,11 +69,5 @@ public class Client {
         }
 
         return true;
-    }
-
-    public void addAnimal(Animal animal) {
-        if (animal == null)
-            return;
-        animals.add(animal);
     }
 }

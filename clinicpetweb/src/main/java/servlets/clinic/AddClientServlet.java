@@ -19,14 +19,6 @@ public class AddClientServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Client client = new Client(req.getParameter("name"));
-
-        if(req.getParameter("kind").equals("Dog")) {
-            client.addAnimal(new Animal(req.getParameter("petName"), Integer.parseInt(req.getParameter("age")), Animal.Kind.DOG));
-        }
-        else {
-            client.addAnimal(new Animal(req.getParameter("petName"), Integer.parseInt(req.getParameter("age")), Animal.Kind.CAT));
-        }
-
         this.clinic.add(client);
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/view"));
     }

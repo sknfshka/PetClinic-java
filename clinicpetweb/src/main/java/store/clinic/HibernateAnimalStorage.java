@@ -1,7 +1,7 @@
 package store.clinic;
 
 
-import models.Client;
+import models.Animal;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,13 +11,21 @@ import org.hibernate.cfg.Configuration;
 import java.util.Collection;
 
 /**
- * Created by Client on 27.08.2017.
+ * Created by Animal on 27.08.2017.
  */
-public class HibernateClientStorage implements Storage<Client> {
+public class HibernateAnimalStorage implements AnimalStorage<Animal> {
     private final SessionFactory factory;
 
-    public HibernateClientStorage() {
+    public HibernateAnimalStorage() {
         factory = new Configuration().configure().buildSessionFactory();
+    }
+
+    @Override
+    public Collection<Animal> findUserAnimals(int id) {
+        return transaction((Session session) -> {
+            final Query query = session.createQuery("from Animal as pet where pet.clientId = :id");
+            query.setInteger("id", id);
+            return (Collection<Animal>) query.list();} );
     }
 
     /**
@@ -49,44 +57,45 @@ public class HibernateClientStorage implements Storage<Client> {
             return command.process(session);
         } finally {
             tx.commit();
+            session.clear();
             session.close();
         }
     }
 
     @Override
-    public Collection<Client> values() {
-        return transaction((Session session) -> session.createQuery("from Client").list() );
+    public Collection<Animal> values() {
+        return transaction((Session session) -> session.createQuery("from Animal").list() );
     }
 
     @Override
-    public int add(final Client client) {
+    public int add(final Animal animal) {
         return transaction((Session session) -> {
-            session.save(client);
-            return client.getId();
+            session.save(animal);
+            return animal.getId();
         } );
     }
 
     @Override
-    public void edit(Client client) {
-        transaction((Session session) -> {session.update(client); return null;});
+    public void edit(Animal animal) {
+        transaction((Session session) -> {session.update(animal); return null;});
     }
 
     @Override
-    public void delete(Client client) {
-        transaction((Session session) -> {session.delete(client); return null;});
+    public void delete(Animal animal) {
+        transaction((Session session) -> {session.delete(animal); return null;});
     }
 
     @Override
-    public Client get(int id) {
-        return transaction((Session session) -> (Client) session.get(Client.class, id));
+    public Animal get(int id) {
+        return transaction((Session session) -> (Animal) session.get(Animal.class, id));
     }
 
     @Override
-    public Collection<Client> findByName(String name) {
+    public Collection<Animal> findByName(String name) {
         return transaction((Session session) -> {
-            final Query query = session.createQuery("from Client as client where client.name like :clientName");
-            query.setString("clientName", "%"+name+"%");
-            return (Collection<Client>) query.list();} );
+            final Query query = session.createQuery("from Animal as pet where pet.name like :AnimalName");
+            query.setString("AnimalName", "%"+name+"%");
+            return (Collection<Animal>) query.list();} );
     }
 
     @Override

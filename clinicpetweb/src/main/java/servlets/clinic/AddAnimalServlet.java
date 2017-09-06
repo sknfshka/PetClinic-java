@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by User on 27.08.2017.
- */
 public class AddAnimalServlet extends HttpServlet {
-    private final AnimalCache clinic = AnimalCache.getInstance();
+    private final AnimalCache animalCache = AnimalCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,13 +28,13 @@ public class AddAnimalServlet extends HttpServlet {
         animal.setClientId(Integer.parseInt(req.getParameter("userId")));
 
         if(req.getParameter("kind").equals("Dog")) {
-            animal.setKind(Animal.Kind.DOG);
+            animal.setKind("Dog");
         }
         else {
-            animal.setKind(Animal.Kind.CAT);
+            animal.setKind("Cat");
         }
 
-        this.clinic.add(animal);
+        this.animalCache.add(animal);
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "edit-client?id=" + animal.getClientId()));
     }
 }

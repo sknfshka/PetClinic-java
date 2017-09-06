@@ -12,9 +12,5 @@
             <generator class="identity"/>
         </id>
         <property name="name" column="name" type="string"/>
-            <set name="pet" cascade="none" >
-            <key column="client_id"/>
-            <one-to-many class="models.Animal"/>
-        </set>
     </class>
 </hibernate-mapping>

@@ -1,18 +1,16 @@
 package models;
 
 public class Animal {
-    public enum Kind {DOG, CAT, PARROT}
 
     private int id;
     private String name;
     private int age;
-    private Kind kind;
-
+    private String kind;
     private int clientId;
 
     @Override
     public String toString() {
-        return "id: " + this.id + " name: " + this.name + " age: " +  this.age + " kind: " + this.kind.toString() + " clientId: " + this.clientId;
+        return "id: " + this.id + " name: " + this.name + " age: " +  this.age + " kind: " + this.kind + " clientId: " + this.clientId;
     }
 
     public int getAge() {
@@ -39,11 +37,11 @@ public class Animal {
         this.name = name;
     }
 
-    public Kind getKind() {
+    public String getKind() {
         return this.kind;
     }
 
-    public void setKind(Kind kind) {
+    public void setKind(String kind) {
         this.kind = kind;
     }
 
@@ -57,7 +55,7 @@ public class Animal {
 
     public Animal() {}
 
-    public Animal(int id, String name, int age, Kind kind, int clientId) {
+    public Animal(int id, String name, int age, String kind, int clientId) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -65,21 +63,21 @@ public class Animal {
         this.clientId = clientId;
     }
 
-    public Animal(String name, int age, Kind kind, int clientId) {
+    public Animal(String name, int age, String kind, int clientId) {
         this.name = name;
         this.age = age;
         this.kind = kind;
         this.clientId = clientId;
     }
 
-    public Animal(int id, String name, int age, Kind kind) {
+    public Animal(int id, String name, int age, String kind) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.kind = kind;
     }
 
-    public Animal(String name, int age, Kind kind) {
+    public Animal(String name, int age, String kind) {
         this.name = name;
         this.age = age;
         this.kind = kind;

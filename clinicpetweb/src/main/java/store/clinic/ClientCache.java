@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class ClientCache implements Storage<Client> {
     private static final ClientCache instance = new ClientCache();
-    private final Storage<Client> clientStorage = new JdbcClientStorage();
+    private final Storage<Client> clientStorage = new HibernateClientStorage();
 
     public static ClientCache getInstance() {
         return instance;

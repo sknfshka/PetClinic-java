@@ -15,12 +15,12 @@ import java.io.IOException;
  * Created by User on 27.08.2017.
  */
 public class EditAnimalServlet extends HttpServlet {
-    private final AnimalCache clinic = AnimalCache.getInstance();
+    private final AnimalCache animalCache = AnimalCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("userId", Integer.valueOf(req.getParameter("clientId")));
-        req.setAttribute("animal", clinic.get(Integer.valueOf(req.getParameter("id"))));
+        req.setAttribute("animal", animalCache.get(Integer.valueOf(req.getParameter("id"))));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/EditAnimal.jsp");
         dispatcher.forward(req, resp);
     }
@@ -34,13 +34,13 @@ public class EditAnimalServlet extends HttpServlet {
         animal.setClientId(Integer.parseInt(req.getParameter("userId")));
 
         if(req.getParameter("kind").equals("Dog")) {
-            animal.setKind(Animal.Kind.DOG);
+            animal.setKind("Dog");
         }
         else {
-            animal.setKind(Animal.Kind.CAT);
+            animal.setKind("Cat");
         }
 
-        this.clinic.edit(animal);
+        this.animalCache.edit(animal);
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "edit-client?id=" + animal.getClientId()));
     }
 }

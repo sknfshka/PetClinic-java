@@ -18,9 +18,9 @@ public class JdbcAnimalStorageTest {
         final JdbcAnimalStorage animalStorage = new JdbcAnimalStorage();
         Client client = new Client("Andrew");
         final int clientId = clientStorage.add(client);
-        final int animalId = animalStorage.add(new Animal("Ashley", 3, Animal.Kind.CAT, clientId));
-        final Client clientDataFromDataBase = clientStorage.get(clientId);
-        assertEquals(animalId, clientDataFromDataBase.getAnimals().iterator().next().getId());
+        final int animalId = animalStorage.add(new Animal("Ashley", 3, "Cat", clientId));
+        final Animal animal = animalStorage.get(animalId);
+        assertEquals(animal.getClientId(), clientId);
         clientStorage.close();
         animalStorage.close();
     }
@@ -32,15 +32,15 @@ public class JdbcAnimalStorageTest {
         assertFalse(animals.isEmpty());
     }
 
-    @Test (expected = IllegalStateException.class)
+    @Test
     public void delete()throws Exception {
         final JdbcAnimalStorage animalStorage = new JdbcAnimalStorage();
         final JdbcClientStorage clientStorage = new JdbcClientStorage();
         Client client = new Client("Test");
         final int clientId = clientStorage.add(client);
-        final int animalId = animalStorage.add(new Animal("Test", 3, Animal.Kind.CAT, clientId));
+        final int animalId = animalStorage.add(new Animal("Test", 777, "Cat", clientId));
         animalStorage.delete(animalStorage.get(animalId));
-        animalStorage.get(animalId);
+        assertEquals(null, animalStorage.get(animalId));
         animalStorage.close();
         clientStorage.close();
     }

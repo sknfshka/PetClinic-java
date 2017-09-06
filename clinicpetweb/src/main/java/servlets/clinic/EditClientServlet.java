@@ -1,6 +1,8 @@
 package servlets.clinic;
 
+import models.Animal;
 import models.Client;
+import store.clinic.AnimalCache;
 import store.clinic.ClientCache;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,18 +15,21 @@ import java.io.IOException;
  * Created by User on 27.08.2017.
  */
 public class EditClientServlet extends HttpServlet {
-    private final ClientCache clinic = ClientCache.getInstance();
+    private final ClientCache clientCache = ClientCache.getInstance();
+    private final AnimalCache animalCache = AnimalCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("client", this.clinic.get(Integer.valueOf(req.getParameter("id"))));
+        req.setAttribute("client", this.clientCache.get(Integer.valueOf(req.getParameter("id"))));
+        req.setAttribute("animals", this.animalCache.findUserAnimals(Integer.valueOf(req.getParameter("id"))));
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/EditClient.jsp");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.clinic.edit(new Client(Integer.parseInt(req.getParameter("id")), req.getParameter("name")));
+        this.clientCache.edit(new Client(Integer.parseInt(req.getParameter("id")), req.getParameter("name")));
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/view"));
     }
 }

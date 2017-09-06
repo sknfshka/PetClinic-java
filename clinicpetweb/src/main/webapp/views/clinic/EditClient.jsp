@@ -29,7 +29,7 @@
             <td>Возраст</td>
             <td>Вид</td>
         </tr>
-        <c:forEach items="${client.animals}" var="animal" varStatus="status">
+        <c:forEach items="${animals}" var="animal" varStatus="status">
             <tr valign="top">
                 <td>${animal.name}</td>
                 <td>${animal.age}</td>

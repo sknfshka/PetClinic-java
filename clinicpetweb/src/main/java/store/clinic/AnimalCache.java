@@ -1,14 +1,13 @@
 package store.clinic;
 
 import models.Animal;
-import models.Client;
 import models.WrongInputDataException;
 
 import java.util.Collection;
 
-public class AnimalCache implements Storage<Animal> {
+public class AnimalCache implements AnimalStorage<Animal> {
     private static final AnimalCache instance = new AnimalCache();
-    private final Storage<Animal> clientStorage = new JdbcAnimalStorage();
+    private final AnimalStorage<Animal> animalStorage = new HibernateAnimalStorage();
 
     public static AnimalCache getInstance() {
         return instance;
@@ -16,32 +15,37 @@ public class AnimalCache implements Storage<Animal> {
 
     @Override
     public Collection<Animal> values() {
-        return clientStorage.values();
+        return animalStorage.values();
     }
 
     @Override
     public int add(Animal animal) {
-        return clientStorage.add(animal);
+        return animalStorage.add(animal);
     }
 
     @Override
     public void edit(Animal animal) {
-        clientStorage.edit(animal);
+        animalStorage.edit(animal);
     }
 
     @Override
     public void delete(Animal animal) {
-        clientStorage.delete(animal);
+        animalStorage.delete(animal);
     }
 
     @Override
     public Animal get(int id) {
-        return clientStorage.get(id);
+        return animalStorage.get(id);
     }
 
     @Override
     public Collection<Animal> findByName(String name) throws WrongInputDataException {
-        return clientStorage.findByName(name);
+        return animalStorage.findByName(name);
+    }
+
+    @Override
+    public Collection<Animal> findUserAnimals(int id) {
+        return animalStorage.findUserAnimals(id);
     }
 
     @Override
