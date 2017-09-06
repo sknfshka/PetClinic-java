@@ -8,9 +8,11 @@ public class Animal {
     private int age;
     private Kind kind;
 
+    private int clientId;
+
     @Override
     public String toString() {
-        return "id: " + this.id + " name: " + this.name + " age: " +  this.age + " kind: " + this.kind.toString();
+        return "id: " + this.id + " name: " + this.name + " age: " +  this.age + " kind: " + this.kind.toString() + " clientId: " + this.clientId;
     }
 
     public int getAge() {
@@ -45,7 +47,30 @@ public class Animal {
         this.kind = kind;
     }
 
-    public Animal() {};
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public Animal() {}
+
+    public Animal(int id, String name, int age, Kind kind, int clientId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.kind = kind;
+        this.clientId = clientId;
+    }
+
+    public Animal(String name, int age, Kind kind, int clientId) {
+        this.name = name;
+        this.age = age;
+        this.kind = kind;
+        this.clientId = clientId;
+    }
 
     public Animal(int id, String name, int age, Kind kind) {
         this.id = id;
@@ -79,7 +104,7 @@ public class Animal {
             return false;
         }
 
-        if(age != animal.age) {
+        if(this.age != animal.age) {
             return false;
         }
 
@@ -87,6 +112,17 @@ public class Animal {
             return false;
         }
 
+        if(this.clientId != animal.clientId) {
+            return false;
+        }
+
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

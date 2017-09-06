@@ -28,6 +28,7 @@ public class JdbcClientStorageTest {
         final JdbcClientStorage storage = new JdbcClientStorage();
         Collection<Client> clients = storage.values();
         assertFalse(clients.isEmpty());
+        storage.close();
     }
 
     @Test
@@ -45,6 +46,7 @@ public class JdbcClientStorageTest {
         }
 
         assertTrue( clients.size() > storage.findByName("Nick").size() );
+        storage.close();
     }
 
 }

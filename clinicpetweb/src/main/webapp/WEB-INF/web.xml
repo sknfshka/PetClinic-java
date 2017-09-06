@@ -46,4 +46,34 @@
         <url-pattern>/clinic/edit-client</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>EditAnimalServlet</servlet-name>
+        <url-pattern>/clinic/edit-animal</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditAnimalServlet</servlet-name>
+        <servlet-class>servlets.clinic.EditAnimalServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AddAnimalServlet</servlet-name>
+        <servlet-class>servlets.clinic.AddAnimalServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddAnimalServlet</servlet-name>
+        <url-pattern>/clinic/add-animal</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteAnimalServlet</servlet-name>
+        <servlet-class>servlets.clinic.DeleteAnimalServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteAnimalServlet</servlet-name>
+        <url-pattern>/clinic/delete-animal</url-pattern>
+    </servlet-mapping>
+
 </web-app>

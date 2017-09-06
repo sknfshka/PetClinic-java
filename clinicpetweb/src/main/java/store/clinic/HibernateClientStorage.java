@@ -1,6 +1,7 @@
 package store.clinic;
 
-import lessons.lesson_6.Client;
+
+import models.Client;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -55,7 +56,7 @@ public class HibernateClientStorage implements Storage<Client> {
         final Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            session.delete(new Client(client.getId(), null, null));
+            session.delete(new Client(client.getId()));
         } finally {
             tx.commit();
             session.close();

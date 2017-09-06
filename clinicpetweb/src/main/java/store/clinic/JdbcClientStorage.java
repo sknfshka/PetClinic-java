@@ -116,7 +116,7 @@ public class JdbcClientStorage implements Storage<Client> {
         }
     }
     @Override
-    public Client get(int id) {
+    public Client get(int id) throws IllegalStateException{
         try (final PreparedStatement statement = this.connection.prepareStatement("select client.uid as uid, pet.uid as petuid, client.name as name, pet.name as petname, pet.age as age, pet.kind as kind from client as client left join pet as pet on pet.client_id = client.uid where client.uid = (?)")) {
             statement.setInt(1, id);
             try (final ResultSet rs = statement.executeQuery()) {
@@ -134,9 +134,8 @@ public class JdbcClientStorage implements Storage<Client> {
                 return currentClient;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(String.format("Client %s does not exists", id));
         }
-        throw new IllegalStateException(String.format("Client %s does not exists", id));
     }
 
     private Animal getAnimal(ResultSet rs) throws SQLException {
@@ -157,7 +156,7 @@ public class JdbcClientStorage implements Storage<Client> {
                 }
             }
 
-            pet = new Animal(rs.getInt("petuid"), rs.getString("petname"), rs.getInt("age"), animalKind);
+            pet = new Animal(rs.getInt("petuid"), rs.getString("petname"), rs.getInt("age"), animalKind, rs.getInt("uid"));
         }
 
         return pet;

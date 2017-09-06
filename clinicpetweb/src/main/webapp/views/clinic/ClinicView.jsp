@@ -17,13 +17,11 @@
     <a href="${pageContext.servletContext.contextPath}/views/clinic/AddClient.jsp">Добавить клиента</a>
     <table border="1">
         <tr>
-            <td>Id</td>
             <td>Имя</td>
             <td>Питомцы</td>
         </tr>
         <c:forEach items="${clients}" var="client" varStatus="status">
             <tr valign="top">
-                <td>${client.id}</td>
                 <td>${client.name}</td>
                 <td>
                 <c:forEach items="${client.animals}" var="animal" varStatus="animalStatus">
