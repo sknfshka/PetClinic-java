@@ -80,6 +80,12 @@ public class JdbcClientStorage implements Storage<Client> {
             throw new IllegalArgumentException();
         }
 
+        Collection<Animal> animals = AnimalCache.getInstance().findUserAnimals(client.getId());
+
+        for (Animal animal: animals) {
+            AnimalCache.getInstance().delete(animal);
+        }
+
         try (final PreparedStatement statement = this.connection.prepareStatement("delete from client as client where client.uid = (?)")) {
             statement.setInt(1, client.getId());
             statement.execute();

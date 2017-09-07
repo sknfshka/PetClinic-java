@@ -48,7 +48,7 @@ public class JdbcAnimalStorage implements AnimalStorage<Animal> {
             statement.setString(1, animal.getName());
             statement.setString(2, animal.getKind());
             statement.setInt(3, animal.getAge());
-            statement.setInt(4, animal.getClientId());
+            statement.setInt(4, animal.getOwner().getId());
             statement.executeUpdate();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -72,7 +72,7 @@ public class JdbcAnimalStorage implements AnimalStorage<Animal> {
             statement.setString(1, animal.getName());
             statement.setString(2, animal.getKind());
             statement.setInt(3, animal.getAge());
-            statement.setInt(4, animal.getClientId());
+            statement.setInt(4, animal.getOwner().getId());
             statement.setInt(5, animal.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -126,7 +126,7 @@ public class JdbcAnimalStorage implements AnimalStorage<Animal> {
                 }
             }
 
-            pet = new Animal(rs.getInt("uid"), rs.getString("name"), rs.getInt("age"), kind, rs.getInt("client_id"));
+            pet = new Animal(rs.getInt("uid"), rs.getString("name"), rs.getInt("age"), kind, ClientCache.getInstance().get(rs.getInt("client_id")));
         }
 
         return pet;

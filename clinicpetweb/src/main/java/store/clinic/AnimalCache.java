@@ -8,6 +8,7 @@ import java.util.Collection;
 public class AnimalCache implements AnimalStorage<Animal> {
     private static final AnimalCache instance = new AnimalCache();
     private final AnimalStorage<Animal> animalStorage = new HibernateAnimalStorage();
+    //private final AnimalStorage<Animal> animalStorage = new JdbcAnimalStorage();
 
     public static AnimalCache getInstance() {
         return instance;

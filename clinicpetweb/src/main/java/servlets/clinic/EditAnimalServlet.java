@@ -3,6 +3,7 @@ package servlets.clinic;
 import models.Animal;
 import models.Client;
 import store.clinic.AnimalCache;
+import store.clinic.ClientCache;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import java.io.IOException;
  */
 public class EditAnimalServlet extends HttpServlet {
     private final AnimalCache animalCache = AnimalCache.getInstance();
+    private final ClientCache clientCache = ClientCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +33,7 @@ public class EditAnimalServlet extends HttpServlet {
         animal.setId(Integer.parseInt(req.getParameter("id")));
         animal.setName(req.getParameter("name"));
         animal.setAge(Integer.parseInt(req.getParameter("age")));
-        animal.setClientId(Integer.parseInt(req.getParameter("userId")));
+        animal.setOwner(clientCache.get(Integer.parseInt(req.getParameter("userId"))));
 
         if(req.getParameter("kind").equals("Dog")) {
             animal.setKind("Dog");
@@ -41,6 +43,6 @@ public class EditAnimalServlet extends HttpServlet {
         }
 
         this.animalCache.edit(animal);
-        resp.sendRedirect(String.format("%s%s", req.getContextPath(), "edit-client?id=" + animal.getClientId()));
+        resp.sendRedirect(String.format("%s%s", req.getContextPath(), "edit-client?id=" + req.getParameter("userId")));
     }
 }

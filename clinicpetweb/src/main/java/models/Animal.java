@@ -6,11 +6,11 @@ public class Animal {
     private String name;
     private int age;
     private String kind;
-    private int clientId;
+    private Client owner;
 
     @Override
     public String toString() {
-        return "id: " + this.id + " name: " + this.name + " age: " +  this.age + " kind: " + this.kind + " clientId: " + this.clientId;
+        return "id: " + this.id + " name: " + this.name + " age: " +  this.age + " kind: " + this.kind;
     }
 
     public int getAge() {
@@ -45,29 +45,29 @@ public class Animal {
         this.kind = kind;
     }
 
-    public int getClientId() {
-        return clientId;
+    public Client getOwner() {
+        return owner;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setOwner(Client owner) {
+        this.owner = owner;
     }
 
     public Animal() {}
 
-    public Animal(int id, String name, int age, String kind, int clientId) {
+    public Animal(int id, String name, int age, String kind, Client owner) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.kind = kind;
-        this.clientId = clientId;
+        this.owner = owner;
     }
 
-    public Animal(String name, int age, String kind, int clientId) {
+    public Animal(String name, int age, String kind, Client owner) {
         this.name = name;
         this.age = age;
         this.kind = kind;
-        this.clientId = clientId;
+        this.owner = owner;
     }
 
     public Animal(int id, String name, int age, String kind) {
@@ -110,7 +110,7 @@ public class Animal {
             return false;
         }
 
-        if(this.clientId != animal.clientId) {
+        if(this.owner != null ? !this.owner.equals(animal.owner) : animal.owner != null) {
             return false;
         }
 
@@ -121,6 +121,8 @@ public class Animal {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (kind != null ? kind.hashCode() : 0);
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
         return result;
     }
 }

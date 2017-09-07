@@ -23,7 +23,7 @@ public class HibernateAnimalStorage implements AnimalStorage<Animal> {
     @Override
     public Collection<Animal> findUserAnimals(int id) {
         return transaction((Session session) -> {
-            final Query query = session.createQuery("from Animal as pet where pet.clientId = :id");
+            final Query query = session.createQuery("from Animal as pet where pet.owner.id = :id");
             query.setInteger("id", id);
             return (Collection<Animal>) query.list();} );
     }
