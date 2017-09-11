@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Client on 27.08.2017.
- */
 public class JdbcClientStorage implements Storage<Client> {
     private final Connection connection;
 

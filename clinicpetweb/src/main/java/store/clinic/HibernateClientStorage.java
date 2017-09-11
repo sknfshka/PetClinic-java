@@ -10,9 +10,6 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.Collection;
 
-/**
- * Created by Client on 27.08.2017.
- */
 public class HibernateClientStorage implements Storage<Client> {
     private final SessionFactory factory;
 

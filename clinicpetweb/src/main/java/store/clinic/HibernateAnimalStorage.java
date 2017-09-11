@@ -10,9 +10,6 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.Collection;
 
-/**
- * Created by Animal on 27.08.2017.
- */
 public class HibernateAnimalStorage implements AnimalStorage<Animal> {
     private final SessionFactory factory;
 
