@@ -25,7 +25,7 @@ public class JdbcAnimalStorage implements AnimalStorage<Animal> {
     public Collection<Animal> values() {
         final List<Animal> animals = new ArrayList<>();
         try (final Statement statement = this.connection.createStatement();
-            final ResultSet rs = statement.executeQuery("select pet.uid, pet.name, pet.client_id, pet.age from pet as pet")) {
+            final ResultSet rs = statement.executeQuery("select pet.uid, pet.name, pet.client_id, pet.age, pet.kind from pet as pet")) {
             while (rs.next()) {
                 animals.add(getAnimal(rs));
             }
@@ -92,7 +92,7 @@ public class JdbcAnimalStorage implements AnimalStorage<Animal> {
     }
     @Override
     public Animal get(int id) throws IllegalStateException{
-        try (final PreparedStatement statement = this.connection.prepareStatement("select pet.uid, pet.name, pet.client_id, pet.age from pet as pet where pet.uid = (?)")) {
+        try (final PreparedStatement statement = this.connection.prepareStatement("select pet.uid, pet.name, pet.client_id, pet.age, pet.kind from pet as pet where pet.uid = (?)")) {
             statement.setInt(1, id);
             try (final ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
@@ -133,7 +133,7 @@ public class JdbcAnimalStorage implements AnimalStorage<Animal> {
     public Collection<Animal> findByName(String name){
         final List<Animal> animals = new ArrayList<>();
 
-        try (final PreparedStatement statement = this.connection.prepareStatement("select pet.uid, pet.name, pet.client_id, pet.age from pet as pet where pet.name = (?)")) {
+        try (final PreparedStatement statement = this.connection.prepareStatement("select pet.uid, pet.name, pet.client_id, pet.age, pet.kind from pet as pet where pet.name = (?)")) {
             statement.setString(1, name);
 
             try (final ResultSet rs = statement.executeQuery()) {
