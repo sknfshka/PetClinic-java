@@ -20,7 +20,7 @@
         <property name="hibernate.c3p0.validate">true</property>
 
         <!-- List of XML mapping files -->
-        <mapping resource="models/Client.hbm.xml"/>
-        <mapping resource="models/Pet.hbm.xml"/>
+        <mapping resource="ru/achrom/models/Client.hbm.xml"/>
+        <mapping resource="ru/achrom/models/Pet.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

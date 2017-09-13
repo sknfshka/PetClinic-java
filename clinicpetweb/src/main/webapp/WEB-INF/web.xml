@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name>ClinicViewServlet</servlet-name>
-        <servlet-class>servlets.clinic.ClinicViewServlet</servlet-class>
+        <servlet-class>ru.achrom.servlets.ClinicViewServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -18,7 +18,7 @@
 
     <servlet>
         <servlet-name>AddClientServlet</servlet-name>
-        <servlet-class>servlets.clinic.AddClientServlet</servlet-class>
+        <servlet-class>ru.achrom.servlets.AddClientServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>DeleteClientServlet</servlet-name>
-        <servlet-class>servlets.clinic.DeleteClientServlet</servlet-class>
+        <servlet-class>ru.achrom.servlets.DeleteClientServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -38,7 +38,7 @@
 
     <servlet>
         <servlet-name>EditClientServlet</servlet-name>
-        <servlet-class>servlets.clinic.EditClientServlet</servlet-class>
+        <servlet-class>ru.achrom.servlets.EditClientServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -53,12 +53,12 @@
 
     <servlet>
         <servlet-name>EditAnimalServlet</servlet-name>
-        <servlet-class>servlets.clinic.EditAnimalServlet</servlet-class>
+        <servlet-class>ru.achrom.servlets.EditAnimalServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>AddAnimalServlet</servlet-name>
-        <servlet-class>servlets.clinic.AddAnimalServlet</servlet-class>
+        <servlet-class>ru.achrom.servlets.AddAnimalServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -68,7 +68,7 @@
 
     <servlet>
         <servlet-name>DeleteAnimalServlet</servlet-name>
-        <servlet-class>servlets.clinic.DeleteAnimalServlet</servlet-class>
+        <servlet-class>ru.achrom.servlets.DeleteAnimalServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.achrom.models.Animal" table="pet">
+        <meta attribute="class-description">
+            This class contains the animal detail.
+        </meta>
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="kind" column="kind" type="string"/>
+        <property name="age" column="age" type="int"/>
+        <!--<property name="clientId" column="client_id" type="int"/>-->
+        <many-to-one name="owner" column="client_id" class="ru.achrom.models.Client" cascade="none" />
+    </class>
+</hibernate-mapping>
