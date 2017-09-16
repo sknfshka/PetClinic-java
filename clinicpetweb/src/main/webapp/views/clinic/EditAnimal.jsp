@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<form action="${pageContext.servletContext.contextPath}/clinic/edit-animal" method="POST">
+<form action="${pageContext.servletContext.contextPath}/animal/edit" method="POST">
     <p>Редактирование питомца "${animal.name}"</p>
     <input type="hidden" name="id" value="${animal.id}">
     <input type="hidden" name="userId" value="${userId}">

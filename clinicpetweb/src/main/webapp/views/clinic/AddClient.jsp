@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<form action="${pageContext.servletContext.contextPath}/clinic/add-client" method="POST">
+<form action="${pageContext.servletContext.contextPath}/client/create" method="POST">
     <label for="name" >Имя : </label>
     <input type="text" name="name" id="name" required>
     <input type="submit" align="center" value="Добавить"/>

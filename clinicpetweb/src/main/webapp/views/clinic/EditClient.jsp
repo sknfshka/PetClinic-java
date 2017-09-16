@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<form action="${pageContext.servletContext.contextPath}/clinic/edit-client" method="POST">
+<form action="${pageContext.servletContext.contextPath}/client/edit" method="POST">
     <p>Редактирование клиента "${client.name}"</p>
     <input type="hidden" name="id" value="${client.id}">
     <label for="name">Имя : </label>
@@ -35,16 +35,16 @@
                 <td>${animal.age}</td>
                 <td>${animal.kind.toString()}</td>
                 <td>
-                    <a href="${pageContext.servletContext.contextPath}/clinic/edit-animal?id=${animal.id}&clientId=${client.id}">Редактировать</a>
+                    <a href="${pageContext.servletContext.contextPath}/animal/edit?id=${animal.id}&clientId=${client.id}">Редактировать</a>
                 </td>
                 <td>
-                    <a href="${pageContext.servletContext.contextPath}/clinic/delete-animal?id=${animal.id}&clientId=${client.id}">Удалить</a>
+                    <a href="${pageContext.servletContext.contextPath}/animal/delete?id=${animal.id}&clientId=${client.id}">Удалить</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
 
-    <a href="${pageContext.servletContext.contextPath}/clinic/add-animal?clientId=${client.id}">Добавить питомца</a>
+    <a href="${pageContext.servletContext.contextPath}/animal/create?clientId=${client.id}">Добавить питомца</a>
 </form>
 </body>
 </html>

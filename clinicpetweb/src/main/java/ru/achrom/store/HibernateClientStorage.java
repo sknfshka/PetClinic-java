@@ -44,11 +44,11 @@ public class HibernateClientStorage implements Storage<Client> {
     private <T> T transaction(final Command<T> command){
         final Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        try {
-            return command.process(session);
-        } finally {
-            tx.commit();
-            session.close();
+            try {
+                return command.process(session);
+            } finally {
+                tx.commit();
+                session.close();
         }
     }
 

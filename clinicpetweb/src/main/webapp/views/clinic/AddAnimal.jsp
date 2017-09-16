@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<form action="${pageContext.servletContext.contextPath}/clinic/add-animal" method="POST">
+<form action="${pageContext.servletContext.contextPath}/animal/create" method="POST">
     <input type="hidden" name="userId" value="${userId}">
     <label for="name" >Имя питомца : </label>
     <input type="text" name="name" id="name" required>

@@ -23,10 +23,10 @@
             <tr valign="top">
                 <td>${client.name}</td>
                 <td>
-                    <a href="${pageContext.servletContext.contextPath}/clinic/edit-client?id=${client.id}">Редактировать</a>
+                    <a href="${pageContext.servletContext.contextPath}/client/edit?id=${client.id}">Редактировать</a>
                 </td>
                 <td>
-                    <a href="${pageContext.servletContext.contextPath}/clinic/delete-client?id=${client.id}">Удалить</a>
+                    <a href="${pageContext.servletContext.contextPath}/client/delete?id=${client.id}">Удалить</a>
                 </td>
             </tr>
         </c:forEach>
